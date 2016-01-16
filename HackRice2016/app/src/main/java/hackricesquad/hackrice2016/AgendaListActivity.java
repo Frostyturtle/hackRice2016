@@ -71,11 +71,6 @@ public class AgendaListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        // init parse
-        ParseObject.registerSubclass(AgendaItem.class);
-        Parse.initialize(this, "MyJy9JASAUPNcwsLW0vRq94jYN7f6THOlfkpwi0D", "YMfyT75RpJVb9QWoTOqVxFjLqXBG9PDJcprt9iPa");
-
-
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -150,4 +145,6 @@ public class AgendaListActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
