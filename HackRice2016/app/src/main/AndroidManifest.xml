@@ -27,6 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hackricesquad.hackrice2016.AgendaListActivity" />
         </activity>
+        <activity android:name=".CreateErrandActivity"></activity>
     </application>
 
 </manifest>
