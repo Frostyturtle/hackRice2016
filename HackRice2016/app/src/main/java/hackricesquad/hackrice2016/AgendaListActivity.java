@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +12,22 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import hackricesquad.hackrice2016.dummy.DummyContent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.parse.Parse;
@@ -38,6 +48,13 @@ public class AgendaListActivity extends AppCompatActivity {
      * device.
      */
     private boolean mTwoPane;
+
+    private DrawerLayout drawerLayout;
+    private FrameLayout frameLayout;
+    private ListView listView;
+    private ArrayList<String> views;
+    private ArrayAdapter<String> adapter;
+    private DrawerClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +88,52 @@ public class AgendaListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
+        listView = (ListView) findViewById(R.id.drawer_list_view);
+
+        String[] temp = getResources().getStringArray(R.array.views_array);
+        views = new ArrayList<>(Arrays.asList(temp));
+
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                R.layout.drawer_list_item, R.id.list_item_text, views);
+        listView.setAdapter(adapter);
+
+        listener = new DrawerClickListener();
+        listView.setOnItemClickListener(listener);
+
+    }
+
+    public class DrawerClickListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //TODO Make it not toast
+            Toast.makeText(getApplicationContext(), views.get(position), Toast.LENGTH_LONG).show();
+            if (position == 0)
+            drawerLayout.closeDrawer(listView);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

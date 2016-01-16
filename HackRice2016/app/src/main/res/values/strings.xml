@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HackRice2016</string>
+    <string name="app_name">Remind Me</string>
     <string name="title_agenda_detail">Agenda Detail</string>
     <string name="parse_app_id">MyJy9JASAUPNcwsLW0vRq94jYN7f6THOlfkpwi0D</string>
     <string name="parse_client_key">YMfyT75RpJVb9QWoTOqVxFjLqXBG9PDJcprt9iPa</string>
@@ -19,5 +19,7 @@
         completions."
     </string>
     <string name="app_id">196828304003526</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>
