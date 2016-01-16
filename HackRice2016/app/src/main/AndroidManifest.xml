@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hackricesquad.hackrice2016">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +30,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hackricesquad.hackrice2016.AgendaListActivity" />
         </activity>
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="MyJy9JASAUPNcwsLW0vRq94jYN7f6THOlfkpwi0D" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="YMfyT75RpJVb9QWoTOqVxFjLqXBG9PDJcprt9iPa" />
         <activity android:name=".CreateErrandActivity"></activity>
     </application>
 

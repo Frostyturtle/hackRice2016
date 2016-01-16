@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.ParseObject;
+
 import hackricesquad.hackrice2016.dummy.DummyContent;
 
 /**
@@ -52,6 +54,8 @@ public class AgendaDetailFragment extends Fragment {
                 appBarLayout.setTitle(mItem.content);
             }
         }
+
+
     }
 
     @Override
