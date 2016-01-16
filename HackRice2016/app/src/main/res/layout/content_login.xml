@@ -15,6 +15,7 @@
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
+        android:text="Login to Facebook"
         android:gravity="center"
         android:paddingRight="6dp"
         android:paddingLeft="6dp"
