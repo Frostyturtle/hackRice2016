@@ -36,7 +36,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/set_location"
         android:layout_below="@id/pick_date"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:text="Set Location"/>
 
     <Button
         android:layout_width="wrap_content"

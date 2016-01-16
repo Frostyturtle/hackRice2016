@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -26,6 +29,7 @@ public class CreateErrandFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Callback cb;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,6 +62,8 @@ public class CreateErrandFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -66,6 +72,32 @@ public class CreateErrandFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.activity_create_errand, container, false);
+
+        Button pickTime = (Button) rootView.findViewById(R.id.pick_time);
+        Button pickDate = (Button) rootView.findViewById(R.id.pick_date);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        final FragmentTransaction ft = fm.beginTransaction();
+        final TimePickerFragment t = new TimePickerFragment();
+        final DatePickerFragment d = new DatePickerFragment();
+
+        pickTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                cb = (Callback) getActivity();
+                cb.callback();
+            }
+        });
+
+        pickDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                cb = (Callback) getActivity();
+                cb.callback();
+            }
+        });
+
+        ft.commit();
+
 
         return rootView;
     }
@@ -108,4 +140,9 @@ public class CreateErrandFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public interface Callback {
+        void callback();
+    }
+
 }
