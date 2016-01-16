@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.parse.ParseUser;
 
 
 /**
@@ -31,6 +34,8 @@ public class CreateErrandFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private Callback cb;
+    private EditText editText;
+    private EditText editRadius;
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,7 +80,9 @@ public class CreateErrandFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_create_errand, container, false);
 
         Button setLocation = (Button) rootView.findViewById(R.id.set_location);
-        Button createEvent = (Button) rootView.findViewById(R.id.create_event);
+        final Button createEvent = (Button) rootView.findViewById(R.id.create_event);
+        editText = (EditText) rootView.findViewById(R.id.edit_event_name);
+        editRadius = (EditText) rootView.findViewById(R.id.set_radius);
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
         final FragmentTransaction ft = fm.beginTransaction();
@@ -87,6 +94,11 @@ public class CreateErrandFragment extends Fragment {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AgendaItem agendaItem = new AgendaItem();
+                agendaItem.setTitle(editText.getText().toString());
+                agendaItem.setOwner(ParseUser.getCurrentUser());
+                agendaItem.setRadius(Integer.parseInt(editRadius.getText().toString()));
+                agendaItem.saveInBackground();
                 Intent i = new Intent(getActivity(), AgendaListActivity.class);
                 startActivity(i);
             }

@@ -11,12 +11,18 @@ import com.parse.ParseUser;
 @ParseClassName("AgendaItem")
 public class AgendaItem extends ParseObject {
 
+    public AgendaItem() { }
+
     public void setTitle(String title){
         put("title", title);
     }
 
     public void setLocation(int location){
         put("location", location);
+    }
+
+    public void setRadius(int radius){
+        put("radius", radius);
     }
 
     public void setOwner(ParseUser user){
