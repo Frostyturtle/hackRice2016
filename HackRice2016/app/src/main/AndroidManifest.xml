@@ -36,6 +36,7 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="YMfyT75RpJVb9QWoTOqVxFjLqXBG9PDJcprt9iPa" />
+        <activity android:name=".CreateErrandActivity"></activity>
     </application>
 
 </manifest>
