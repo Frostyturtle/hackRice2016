@@ -1,6 +1,7 @@
 package hackricesquad.hackrice2016;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -73,30 +74,23 @@ public class CreateErrandFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.activity_create_errand, container, false);
 
-        Button pickTime = (Button) rootView.findViewById(R.id.pick_time);
-        Button pickDate = (Button) rootView.findViewById(R.id.pick_date);
+        Button setLocation = (Button) rootView.findViewById(R.id.set_location);
+        Button createEvent = (Button) rootView.findViewById(R.id.create_event);
+
         FragmentManager fm = getActivity().getSupportFragmentManager();
         final FragmentTransaction ft = fm.beginTransaction();
         final TimePickerFragment t = new TimePickerFragment();
         final DatePickerFragment d = new DatePickerFragment();
 
-        pickTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                cb = (Callback) getActivity();
-                cb.callback();
-            }
-        });
-
-        pickDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                cb = (Callback) getActivity();
-                cb.callback();
-            }
-        });
-
         ft.commit();
+
+        createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), AgendaListActivity.class);
+                startActivity(i);
+            }
+        });
 
 
         return rootView;

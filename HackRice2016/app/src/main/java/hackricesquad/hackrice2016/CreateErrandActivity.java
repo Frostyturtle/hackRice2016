@@ -1,6 +1,7 @@
 package hackricesquad.hackrice2016;
 
 import android.content.Intent;
+import android.location.GpsStatus;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -10,9 +11,10 @@ import android.widget.Button;
 public class CreateErrandActivity extends FragmentActivity implements CreateErrandFragment.OnFragmentInteractionListener,
         TimePickerFragment.OnFragmentInteractionListener, CreateErrandFragment.Callback {
 
-    private Button pickTime;
-    private Button pickDate;
+
+    private Button setLocation;
     private Button createEvent;
+
     private android.support.v4.app.FragmentManager fm;
     android.support.v4.app.FragmentTransaction ft;
     private CreateErrandFragment.Callback callback;
@@ -22,8 +24,7 @@ public class CreateErrandActivity extends FragmentActivity implements CreateErra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_container);
 
-        pickTime = (Button) findViewById(R.id.pick_time);
-        pickDate = (Button) findViewById(R.id.pick_date);
+        setLocation = (Button) findViewById(R.id.set_location);
         createEvent = (Button) findViewById(R.id.create_event);
 
         fm = getSupportFragmentManager();
@@ -35,6 +36,8 @@ public class CreateErrandActivity extends FragmentActivity implements CreateErra
         ft.add(R.id.fragment_container, f);
 
         ft.commit();
+
+
 
     }
 

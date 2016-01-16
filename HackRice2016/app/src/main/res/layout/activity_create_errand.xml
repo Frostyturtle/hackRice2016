@@ -17,25 +17,18 @@
 
         />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pick_time"
+    <EditText
+        android:id="@+id/set_radius"
         android:layout_below="@id/edit_event_name"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pick_date"
-        android:layout_below="@id/pick_time"
-        android:layout_centerHorizontal="true" />
+        android:hint="Enter Radius (miles)"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/set_location"
-        android:layout_below="@id/pick_date"
+        android:layout_below="@id/set_radius"
         android:layout_centerHorizontal="true"
         android:text="Set Location"/>
 
@@ -43,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/create_event"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom= "true"
         android:layout_centerHorizontal="true"
         android:text="Create Event"/>
 
