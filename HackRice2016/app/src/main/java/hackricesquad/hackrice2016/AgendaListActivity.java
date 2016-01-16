@@ -19,6 +19,8 @@ import android.widget.TextView;
 import hackricesquad.hackrice2016.dummy.DummyContent;
 
 import java.util.List;
+
+import com.parse.Parse;
 import com.parse.ParseObject;
 
 /**
@@ -68,6 +70,11 @@ public class AgendaListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+
+        // init parse
+        ParseObject.registerSubclass(AgendaItem.class);
+        Parse.initialize(this, "MyJy9JASAUPNcwsLW0vRq94jYN7f6THOlfkpwi0D", "YMfyT75RpJVb9QWoTOqVxFjLqXBG9PDJcprt9iPa");
+
 
     }
 
