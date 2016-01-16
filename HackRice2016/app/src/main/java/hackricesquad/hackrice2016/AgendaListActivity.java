@@ -140,7 +140,6 @@ public class AgendaListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
->>>>>>> a2c437d40740e14909622d789f8d88dc7b5397e6
     }
 
     private SimpleItemRecyclerViewAdapter setupRecyclerView(@NonNull RecyclerView recyclerView) {
