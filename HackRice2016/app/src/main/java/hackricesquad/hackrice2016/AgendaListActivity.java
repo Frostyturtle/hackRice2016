@@ -19,6 +19,8 @@ import android.widget.TextView;
 import hackricesquad.hackrice2016.dummy.DummyContent;
 
 import java.util.List;
+
+import com.parse.Parse;
 import com.parse.ParseObject;
 
 /**
@@ -143,4 +145,6 @@ public class AgendaListActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
