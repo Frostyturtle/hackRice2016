@@ -19,6 +19,7 @@ import android.widget.TextView;
 import hackricesquad.hackrice2016.dummy.DummyContent;
 
 import java.util.List;
+import com.parse.ParseObject;
 
 /**
  * An activity representing a list of Agenda. This activity
@@ -65,6 +66,7 @@ public class AgendaListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
