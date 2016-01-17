@@ -78,7 +78,7 @@ public class AgendaListActivity extends AppCompatActivity {
 
         View recyclerView = findViewById(R.id.agenda_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        SimpleItemRecyclerViewAdapter recyclerViewAdapter = setupRecyclerView((RecyclerView) recyclerView);
 
         if (findViewById(R.id.agenda_detail_container) != null) {
             // The detail container view will be present only in the
@@ -101,6 +101,12 @@ public class AgendaListActivity extends AppCompatActivity {
 
         listener = new DrawerClickListener();
         listView.setOnItemClickListener(listener);
+
+
+        for(int i = 0; i < DummyContent.ITEMS.size(); i++){
+            recyclerViewAdapter.notifyItemChanged(i);
+        }
+
 
     }
 
@@ -145,8 +151,10 @@ public class AgendaListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+    private SimpleItemRecyclerViewAdapter setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        SimpleItemRecyclerViewAdapter adapter = new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS);
+        recyclerView.setAdapter(adapter);
+        return adapter;
     }
 
     public class SimpleItemRecyclerViewAdapter

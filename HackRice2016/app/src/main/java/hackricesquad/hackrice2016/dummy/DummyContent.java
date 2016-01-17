@@ -1,5 +1,13 @@
 package hackricesquad.hackrice2016.dummy;
 
+import android.util.Log;
+
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +35,19 @@ public class DummyContent {
 
     static {
         // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("AgendaItem");
+        query.whereEqualTo("owner", ParseUser.getCurrentUser());
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> scoreList, ParseException e) {
+                if (e == null) {
+                    Log.i("hello", "hello");
+                    for (int i = 0; i < scoreList.size(); i++) {
+                        String title = scoreList.get(i).getString("title");
+                        addItem(createDummyItem(title, i));
+                    }
+                }
+            }
+        });
     }
 
     private static void addItem(DummyItem item) {
@@ -37,8 +55,8 @@ public class DummyContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static DummyItem createDummyItem(String title, int position) {
+        return new DummyItem(title, "Item " + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {
