@@ -109,7 +109,16 @@ public class AgendaListActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             //TODO Make it not toast
             Toast.makeText(getApplicationContext(), views.get(position), Toast.LENGTH_LONG).show();
-            if (position == 0)
+            //if (position == 0)
+            if (views.get(position).equals("Agenda")) {
+                Intent i = new Intent(getApplicationContext(), AgendaListActivity.class);
+                startActivity(i);
+            }
+            if (views.get(position).equals("Map")) {
+                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(i);
+            }
+
             drawerLayout.closeDrawer(listView);
         }
     }
