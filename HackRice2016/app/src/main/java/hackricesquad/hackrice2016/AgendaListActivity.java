@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,8 +31,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import static hackricesquad.hackrice2016.dummy.DummyContent.addItem;
+import static hackricesquad.hackrice2016.dummy.DummyContent.createDummyItem;
 
 /**
  * An activity representing a list of Agenda. This activity
@@ -41,7 +49,7 @@ import com.parse.ParseObject;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class AgendaListActivity extends AppCompatActivity {
+public class AgendaListActivity extends AppCompatActivity implements CreateErrandFragment.RecyclerCallback {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -50,11 +58,11 @@ public class AgendaListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
     private DrawerLayout drawerLayout;
-    private FrameLayout frameLayout;
     private ListView listView;
     private ArrayList<String> views;
     private ArrayAdapter<String> adapter;
     private DrawerClickListener listener;
+    private SimpleItemRecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +84,10 @@ public class AgendaListActivity extends AppCompatActivity {
             }
         });
 
+        // recycler view setup
         View recyclerView = findViewById(R.id.agenda_list);
         assert recyclerView != null;
-        SimpleItemRecyclerViewAdapter recyclerViewAdapter = setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView((RecyclerView) recyclerView);
 
         if (findViewById(R.id.agenda_detail_container) != null) {
             // The detail container view will be present only in the
@@ -88,8 +97,10 @@ public class AgendaListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
+        refresh();
+
+        // drawer set up
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
         listView = (ListView) findViewById(R.id.drawer_list_view);
 
         String[] temp = getResources().getStringArray(R.array.views_array);
@@ -102,12 +113,6 @@ public class AgendaListActivity extends AppCompatActivity {
         listener = new DrawerClickListener();
         listView.setOnItemClickListener(listener);
 
-
-        for(int i = 0; i < DummyContent.ITEMS.size(); i++){
-            recyclerViewAdapter.notifyItemChanged(i);
-        }
-
-
     }
 
     public class DrawerClickListener implements AdapterView.OnItemClickListener {
@@ -118,6 +123,10 @@ public class AgendaListActivity extends AppCompatActivity {
             if (position == 0)
             drawerLayout.closeDrawer(listView);
         }
+    }
+
+    public void update(SimpleItemRecyclerViewAdapter adapter){
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -142,10 +151,8 @@ public class AgendaListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private SimpleItemRecyclerViewAdapter setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        SimpleItemRecyclerViewAdapter adapter = new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS);
-        recyclerView.setAdapter(adapter);
-        return adapter;
+    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -217,5 +224,22 @@ public class AgendaListActivity extends AppCompatActivity {
         }
     }
 
+    private void refresh() {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("AgendaItem");
+        query.whereEqualTo("owner", ParseUser.getCurrentUser());
+        query.fromLocalDatastore();
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> scoreList, ParseException e) {
+                if (e == null) {
+                    Log.i("hello", "hello");
+                    for (int i = 0; i < scoreList.size(); i++) {
+                        String title = scoreList.get(i).getString("title");
+                        addItem(createDummyItem(i));
+                    }
+                }
+            }
+        });
+    }
 
 }

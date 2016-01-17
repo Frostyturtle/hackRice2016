@@ -15,6 +15,8 @@ import android.widget.EditText;
 
 import com.parse.ParseUser;
 
+import hackricesquad.hackrice2016.dummy.DummyContent;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,7 +101,9 @@ public class CreateErrandFragment extends Fragment {
                 agendaItem.setOwner(ParseUser.getCurrentUser());
                 agendaItem.setRadius(Integer.parseInt(editRadius.getText().toString()));
                 agendaItem.saveInBackground();
+                agendaItem.pinInBackground();
                 Intent i = new Intent(getActivity(), AgendaListActivity.class);
+                i.putExtra("changed", "ya");
                 startActivity(i);
             }
         });
@@ -149,6 +153,10 @@ public class CreateErrandFragment extends Fragment {
 
     public interface Callback {
         void callback();
+    }
+
+    public interface RecyclerCallback {
+        void update(AgendaListActivity.SimpleItemRecyclerViewAdapter adapter);
     }
 
 }

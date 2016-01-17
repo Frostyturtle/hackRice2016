@@ -34,29 +34,15 @@ public class DummyContent {
     private static final int COUNT = 25;
 
     static {
-        // Add some sample items.
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("AgendaItem");
-        query.whereEqualTo("owner", ParseUser.getCurrentUser());
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> scoreList, ParseException e) {
-                if (e == null) {
-                    Log.i("hello", "hello");
-                    for (int i = 0; i < scoreList.size(); i++) {
-                        String title = scoreList.get(i).getString("title");
-                        addItem(createDummyItem(title, i));
-                    }
-                }
-            }
-        });
     }
 
-    private static void addItem(DummyItem item) {
+    public static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(String title, int position) {
-        return new DummyItem(title, "Item " + position, makeDetails(position));
+    public static DummyItem createDummyItem(int position) {
+        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
     }
 
     private static String makeDetails(int position) {

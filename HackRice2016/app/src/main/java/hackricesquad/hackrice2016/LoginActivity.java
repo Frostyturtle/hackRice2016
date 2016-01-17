@@ -40,6 +40,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.OnF
 
         // init parse
         ParseObject.registerSubclass(AgendaItem.class);
+        Parse.enableLocalDatastore(getApplicationContext());
         Parse.initialize(this, "MyJy9JASAUPNcwsLW0vRq94jYN7f6THOlfkpwi0D", "YMfyT75RpJVb9QWoTOqVxFjLqXBG9PDJcprt9iPa");
         ParseFacebookUtils.initialize(getApplicationContext());
 
