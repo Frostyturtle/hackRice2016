@@ -117,6 +117,13 @@ public class CreateErrandFragment extends Fragment {
             }
         });
 
+        setLocation.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(getActivity(), MapsPlaceMarker.class));
+            }
+        });
+
 
         return rootView;
     }
