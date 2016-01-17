@@ -33,4 +33,5 @@ dependencies {
     compile 'com.parse:parse-android:1.+'
     compile 'com.parse:parsefacebookutils-v4-android:1.10.3@aar'
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
+    compile 'com.google.android.gms:play-services:8.1.0'
 }

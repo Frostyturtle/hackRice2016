@@ -82,6 +82,7 @@ public class CreateErrandFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_create_errand, container, false);
 
         Button setLocation = (Button) rootView.findViewById(R.id.set_location);
+        Button cancelButton = (Button) rootView.findViewById(R.id.cancel_button);
         final Button createEvent = (Button) rootView.findViewById(R.id.create_event);
         editText = (EditText) rootView.findViewById(R.id.edit_event_name);
         editRadius = (EditText) rootView.findViewById(R.id.set_radius);
@@ -104,6 +105,14 @@ public class CreateErrandFragment extends Fragment {
                 agendaItem.pinInBackground();
                 Intent i = new Intent(getActivity(), AgendaListActivity.class);
                 i.putExtra("changed", "ya");
+                startActivity(i);
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), AgendaListActivity.class);
                 startActivity(i);
             }
         });
