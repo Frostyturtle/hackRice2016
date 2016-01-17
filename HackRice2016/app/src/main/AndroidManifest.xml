@@ -85,6 +85,10 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+
+        <activity android:name=".MapsPlaceMarker"
+            android:label="Map"></activity>
+
     </application>
 
 </manifest>

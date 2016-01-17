@@ -29,4 +29,20 @@ public class AgendaItem extends ParseObject {
         put("owner", user);
     }
 
+    public void setLatitude(double latitude) {
+        put("latitude", latitude);
+    }
+
+    public void setLongitude(double longitude) {
+        put("longitude", longitude);
+    }
+
+    public double getLatitude() {
+        return getDouble("latitude");
+    }
+
+    public double getLongitude() {
+        return getDouble("longitude");
+    }
+
 }

@@ -15,6 +15,8 @@ import android.widget.EditText;
 
 import com.parse.ParseUser;
 
+import java.util.Map;
+
 import hackricesquad.hackrice2016.dummy.DummyContent;
 
 
@@ -38,6 +40,8 @@ public class CreateErrandFragment extends Fragment {
     private Callback cb;
     private EditText editText;
     private EditText editRadius;
+
+    private double latitude = 0, longitude = 0;
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,6 +75,11 @@ public class CreateErrandFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        latitude = MapsPlaceMarker.getCoordinates().latitude;
+        longitude = MapsPlaceMarker.getCoordinates().longitude;
+        //Intent i = getActivity().getIntent();
+        //latitude = i.getDoubleExtra("latitude", 0);
+        //longitude = i.getDoubleExtra("longitude", 0);
 
     }
 
@@ -101,6 +110,8 @@ public class CreateErrandFragment extends Fragment {
                 agendaItem.setTitle(editText.getText().toString());
                 agendaItem.setOwner(ParseUser.getCurrentUser());
                 agendaItem.setRadius(Integer.parseInt(editRadius.getText().toString()));
+                agendaItem.setLatitude(MapsPlaceMarker.getCoordinates().latitude);
+                agendaItem.setLongitude(MapsPlaceMarker.getCoordinates().longitude);
                 agendaItem.saveInBackground();
                 agendaItem.pinInBackground();
                 Intent i = new Intent(getActivity(), AgendaListActivity.class);
@@ -120,7 +131,8 @@ public class CreateErrandFragment extends Fragment {
         setLocation.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(getActivity(), MapsPlaceMarker.class));
+                Intent i = new Intent(getActivity(), MapsPlaceMarker.class);
+                startActivity(i);
             }
         });
 

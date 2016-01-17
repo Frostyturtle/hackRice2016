@@ -1,5 +1,6 @@
 package hackricesquad.hackrice2016;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -39,16 +40,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.setMyLocationEnabled(true);
+
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        for (int i = 0; i < AgendaListActivity.list.size(); i++) {
+            AgendaItem item = (AgendaItem)AgendaListActivity.list.get(i);
+            double x = item.getLatitude();
+            double y = item.getLongitude();
+            LatLng location = new LatLng(x, y);
+            mMap.addMarker(new MarkerOptions().position(location).title("<event name>"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        }
 
         GoogleMap.OnMarkerClickListener listener = new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
 
                 //TODO Go to event agendadetailactivity
+
+
 
                 return true;
             }

@@ -64,6 +64,8 @@ public class AgendaListActivity extends AppCompatActivity implements CreateErran
     private DrawerClickListener listener;
     private SimpleItemRecyclerViewAdapter recyclerViewAdapter;
 
+    public static List<ParseObject> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -241,6 +243,8 @@ public class AgendaListActivity extends AppCompatActivity implements CreateErran
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> scoreList, ParseException e) {
                 if (e == null) {
+                    DummyContent.ITEMS.clear();
+                    list = scoreList;
                     Log.i("hello", "hello");
                     for (int i = 0; i < scoreList.size(); i++) {
                         String title = scoreList.get(i).getString("title");

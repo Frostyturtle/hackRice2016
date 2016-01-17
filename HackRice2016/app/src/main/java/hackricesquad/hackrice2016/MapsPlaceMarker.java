@@ -1,7 +1,10 @@
 package hackricesquad.hackrice2016;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,13 +16,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsPlaceMarker extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LatLng coordinates;
+    private static LatLng coordinates = new LatLng(0,0);
+
+    public static LatLng getCoordinates(){
+        return coordinates;
+    }
+
     private class OMCL implements GoogleMap.OnMapClickListener{
         @Override
         public void onMapClick(LatLng latLng) {
 
             coordinates = latLng;
-
+Log.d("test", "coordinates: " + coordinates);
             // Creating a marker
             MarkerOptions markerOptions = new MarkerOptions();
 
@@ -49,8 +57,35 @@ public class MapsPlaceMarker extends FragmentActivity implements OnMapReadyCallb
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
+ /*   @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+
+            Intent i = new Intent(getApplicationContext(), CreateErrandFragment.class);
+            i.putExtra("latitude", coordinates.latitude);
+            i.putExtra("longitude", coordinates.longitude);
+            startActivity(i);
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+  */
+/*
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //Log.d("CDA", "onBackPressed Called");
+        Intent i = new Intent(getApplicationContext(), CreateErrandFragment.class);
+        i.putExtra("latitude", coordinates.latitude);
+        i.putExtra("longitude", coordinates.longitude);
+
+    }
+*/
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
